@@ -23,7 +23,7 @@ class BookTest {
   @Test
   public void shouldNotCastToDifferentClass() {
     Product product = new Book();
-    TShirt shirt = (TShirt) product;
+    //TShirt shirt = (TShirt) product;
   }
 
   @Test
