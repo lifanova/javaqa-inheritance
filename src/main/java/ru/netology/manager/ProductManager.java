@@ -20,6 +20,7 @@ public class ProductManager {
         Product[] result = new Product[0];
 
         if (text == null || text.isEmpty()) {
+            System.out.println("[searchBy]: Error: text is empty!");
             return result;
         }
 
@@ -36,16 +37,18 @@ public class ProductManager {
     }
 
     public boolean matches(Product product, String search) {
-        boolean result = false;
+        System.out.println("[matches]: " + search);
 
         if (product instanceof Book) {
             Book book = (Book) product;
             String name = book.getName();
             String author = book.getAuthor();
 
-            if (name != null && !name.isEmpty() && name.equalsIgnoreCase(search) ||
-                    author != null && !author.isEmpty() && author.equalsIgnoreCase(search)) {
-                result = true;
+
+            if (name.equalsIgnoreCase(search) ||
+                    author.equalsIgnoreCase(search)) {
+                System.out.println("[matches]: if " + name + ", " + author);
+                return true;
             }
 
         } else if (product instanceof Smartphone) {
@@ -53,14 +56,15 @@ public class ProductManager {
             String name = smartphone.getName();
             String manufacturer = smartphone.getManufacturer();
 
-            if (name != null && !name.isEmpty() && name.equalsIgnoreCase(search) ||
-                    manufacturer != null && !manufacturer.isEmpty() && manufacturer.equalsIgnoreCase(search)) {
-                result = true;
+            if (name.equalsIgnoreCase(search) ||
+                    manufacturer.equalsIgnoreCase(search)) {
+                System.out.println("[matches] in if");
+                return true;
             }
 
         }
 
-        return result;
+        return false;
     }
 
     public ProductRepository getRepository() {
