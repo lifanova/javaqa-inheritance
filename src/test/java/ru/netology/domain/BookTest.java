@@ -74,4 +74,47 @@ class BookTest {
 
         assertNotEquals(first, null);
     }
+
+    @Test
+    public void shouldMatches() {
+        Book book = new Book(1, "The Lord of the Rings: The Fellowship of the Ring", 200, "Tolkien");
+        String name = book.getName();
+
+        assertTrue(book.matches(name));
+    }
+
+    @Test
+    public void shouldIncorrectMatches() {
+        Book book = new Book(1, "The Lord of the Rings: The Fellowship of the Ring", 200, "Tolkien");
+
+        assertFalse(book.matches("The Lord of the Rings"));
+    }
+
+    @Test
+    public void shouldMatchesByAuthor() {
+        Book book = new Book(1, "The Lord of the Rings: The Fellowship of the Ring", 200, "Tolkien");
+
+        assertTrue(book.matches(book.getAuthor()));
+    }
+
+    @Test
+    public void shouldIncorrectMatchesByAuthor() {
+        Book book = new Book(1, "The Lord of the Rings: The Fellowship of the Ring", 200, "Tolkien");
+
+        assertFalse(book.matches("Frei"));
+    }
+
+    @Test
+    public void shouldMatchesWithNullValue() {
+        Book book = new Book(1, "The Lord of the Rings: The Fellowship of the Ring", 200, "Tolkien");
+
+        assertFalse(book.matches(null));
+    }
+
+    @Test
+    public void shouldMatchesWithEmptyValue() {
+        Book book = new Book(1, "The Lord of the Rings: The Fellowship of the Ring", 200, "Tolkien");
+
+        assertFalse(book.matches(""));
+    }
 }

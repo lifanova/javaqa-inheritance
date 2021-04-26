@@ -95,4 +95,33 @@ class ProductTest {
 
         assertNotEquals(first, null);
     }
+
+    @Test
+    public void shouldMatches() {
+        Product first = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 200);
+        String name = first.getName();
+
+        assertTrue(first.matches(name));
+    }
+
+    @Test
+    public void shouldIncorrectMatches() {
+        Product first = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 200);
+
+        assertFalse(first.matches("The Lord of the Rings"));
+    }
+
+    @Test
+    public void shouldMatchesWithNullValue() {
+        Product first = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 200);
+
+        assertFalse(first.matches(null));
+    }
+
+    @Test
+    public void shouldMatchesWithEmptyValue() {
+        Product first = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 200);
+
+        assertFalse(first.matches(""));
+    }
 }

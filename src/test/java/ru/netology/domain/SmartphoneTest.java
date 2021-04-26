@@ -2,8 +2,8 @@ package ru.netology.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class SmartphoneTest {
 
@@ -65,5 +65,48 @@ public class SmartphoneTest {
         Smartphone first = new Smartphone(1, "IPhone", 20000, "Apple");
 
         assertNotEquals(first, null);
+    }
+
+    @Test
+    public void shouldMatchesByName() {
+        Smartphone smartphone = new Smartphone(1, "IPhone", 20000, "Apple");
+        String name = smartphone.getName();
+
+        assertTrue(smartphone.matches(name));
+    }
+
+    @Test
+    public void shouldIncorrectMatchesByName() {
+        Smartphone smartphone = new Smartphone(1, "IPhone", 200, "Apple");
+
+        assertFalse(smartphone.matches("Nokia"));
+    }
+
+    @Test
+    public void shouldMatchesByManufacturer() {
+        Smartphone smartphone = new Smartphone(1, "IPhone", 20000, "Apple");
+
+        assertTrue(smartphone.matches(smartphone.getManufacturer()));
+    }
+
+    @Test
+    public void shouldIncorrectMatchesByManufacturer() {
+        Smartphone smartphone = new Smartphone(1, "IPhone", 200, "Apple");
+
+        assertFalse(smartphone.matches("Nokia"));
+    }
+
+    @Test
+    public void shouldMatchesWithNullValue() {
+        Smartphone smartphone = new Smartphone(1, "IPhone", 200, "Apple");
+
+        assertFalse(smartphone.matches(null));
+    }
+
+    @Test
+    public void shouldMatchesWithEmptyValue() {
+        Smartphone smartphone = new Smartphone(1, "IPhone", 200, "Apple");
+
+        assertFalse(smartphone.matches(""));
     }
 }

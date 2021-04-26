@@ -13,6 +13,17 @@ public class Book extends Product {
         this.author = author;
     }
 
+    /*
+     * Поиск
+     * */
+    public boolean matches(String search) {
+        if (search == null || search.isEmpty()) {
+            System.out.println("[matches]: Error: null or empty search string!");
+            return false;
+        }
+
+        return super.matches(search) || (author.equalsIgnoreCase(search));
+    }
 
     public String getAuthor() {
         return author;

@@ -16,6 +16,18 @@ public class Product {
         this.price = price;
     }
 
+    /*
+     * Поиск
+     * */
+    public boolean matches(String search) {
+        if (search == null || search.isEmpty()) {
+            System.out.println("[matches]: Error: null or empty search string!");
+            return false;
+        }
+
+        return (name.equalsIgnoreCase(search));
+    }
+
     public int getId() {
         return id;
     }
@@ -63,4 +75,6 @@ public class Product {
                 ", price=" + price +
                 '}';
     }
+
+
 }

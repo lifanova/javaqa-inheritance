@@ -13,6 +13,18 @@ public class Smartphone extends Product {
         this.manufacturer = manufacturer;
     }
 
+    /*
+     * Поиск
+     * */
+    public boolean matches(String search) {
+        if (search == null || search.isEmpty()) {
+            System.out.println("[matches]: Error: null or empty search string!");
+            return false;
+        }
+
+        return super.matches(search) || (manufacturer.equalsIgnoreCase(search));
+    }
+
     public String getManufacturer() {
         return manufacturer;
     }
