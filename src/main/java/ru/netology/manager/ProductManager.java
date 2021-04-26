@@ -37,28 +37,25 @@ public class ProductManager {
     }
 
     public boolean matches(Product product, String search) {
-        System.out.println("[matches]: " + search);
 
         if (product instanceof Book) {
             Book book = (Book) product;
             String name = book.getName();
             String author = book.getAuthor();
 
-
             if (name.equalsIgnoreCase(search) ||
                     author.equalsIgnoreCase(search)) {
-                System.out.println("[matches]: if " + name + ", " + author);
                 return true;
             }
+        }
 
-        } else if (product instanceof Smartphone) {
+        if (product instanceof Smartphone) {
             Smartphone smartphone = (Smartphone) product;
             String name = smartphone.getName();
             String manufacturer = smartphone.getManufacturer();
 
             if (name.equalsIgnoreCase(search) ||
                     manufacturer.equalsIgnoreCase(search)) {
-                System.out.println("[matches] in if");
                 return true;
             }
 

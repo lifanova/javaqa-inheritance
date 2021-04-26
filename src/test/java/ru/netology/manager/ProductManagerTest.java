@@ -12,12 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProductManagerTest {
     ProductRepository repository;
     ProductManager manager;
-
+    Product[] products;
 
     @BeforeEach
     public void PrepareData() {
         repository = new ProductRepository();
         manager = new ProductManager(repository);
+        products = new Product[4];
+        products[0] = new Book(1, "The Lord of the Rings: The Fellowship of the Ring", 200, "Tolkien");
+        products[1] = new Book(2, "The Lord of the Rings: The Two Towers", 200, "Tolkien");
+        products[2] = new Smartphone(3, "IPhone", 20000, "Apple");
+        products[3] = new Smartphone(4, "IPhone", 70000, "Apple");
     }
 
     @Test
@@ -57,14 +62,16 @@ public class ProductManagerTest {
 
     @Test
     public void shouldSearchBookName() {
-        Product product = new Book(1, "The Lord of the Rings: The Fellowship of the Ring", 200, "Tolkien");
-        // Ожидаемый результат - продукт, который добавляем
-        Product[] expected = {product};
+         // Ожидаемый результат - продукт, который добавляем
+        Product[] expected = {products[0]};
 
         //Добавляем продукт через менеджер
-        manager.addProduct(product);
+        manager.addProduct(products[0]);
+        manager.addProduct(products[1]);
+        manager.addProduct(products[2]);
+        manager.addProduct(products[3]);
         //Ищем по имени
-        Product[] actual = manager.searchBy(product.getName());
+        Product[] actual = manager.searchBy(products[0].getName());
 
         assertArrayEquals(expected, actual);
     }
@@ -86,15 +93,14 @@ public class ProductManagerTest {
 
     @Test
     void shouldSearchAuthor() {
-        Product first = new Book(1, "The Lord of the Rings: The Fellowship of the Ring", 200, "Tolkien");
-        Product second = new Book(2, "The Lord of the Rings: The Two Towers", 200, "Tolkien");
-
         // Ожидаемый результат - массив из 2-х книг, у к-рых 1 автор
-        Product[] expected = {first, second};
+        Product[] expected = {products[0], products[1]};
 
         //Добавляем продукты через менеджер
-        manager.addProduct(first);
-        manager.addProduct(second);
+        manager.addProduct(products[0]);
+        manager.addProduct(products[1]);
+        manager.addProduct(products[2]);
+        manager.addProduct(products[3]);
 
         String author = "Tolkien";
         Product[] actual = manager.searchBy(author);
@@ -104,30 +110,28 @@ public class ProductManagerTest {
 
     @Test
     void shouldSearchSmartphoneName() {
-        Product first = new Smartphone(1, "IPhone", 20000, "Apple");
-        Product second = new Smartphone(2, "IPhone", 70000, "Apple");
-
-        Product[] expected = {first, second};
+        Product[] expected = {products[2], products[3]};
 
         //Добавляем продукты через менеджер
-        manager.addProduct(first);
-        manager.addProduct(second);
+        manager.addProduct(products[0]);
+        manager.addProduct(products[1]);
+        manager.addProduct(products[2]);
+        manager.addProduct(products[3]);
 
-        Product[] actual = manager.searchBy(first.getName());
+        Product[] actual = manager.searchBy(products[2].getName());
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
     void shouldSearchIncorrectName() {
-        Product first = new Smartphone(1, "IPhone SE", 20000, "Apple");
-        Product second = new Smartphone(2, "IPhone 11", 70000, "Apple");
-
         Product[] expected = {};
 
         //Добавляем продукты через менеджер
-        manager.addProduct(first);
-        manager.addProduct(second);
+        manager.addProduct(products[0]);
+        manager.addProduct(products[1]);
+        manager.addProduct(products[2]);
+        manager.addProduct(products[3]);
 
         String name = "Samsung";
         Product[] actual = manager.searchBy(name);
@@ -137,21 +141,19 @@ public class ProductManagerTest {
 
     @Test
     void shouldSearchManufacturer() {
-        Product first = new Smartphone(1, "IPhone SE", 20000, "Apple");
-        Product second = new Smartphone(2, "IPhone 11", 70000, "Apple");
-
-        Product[] expected = {first, second};
+        Product[] expected = {products[2], products[3]};
 
         //Добавляем продукты через менеджер
-        manager.addProduct(first);
-        manager.addProduct(second);
+        manager.addProduct(products[0]);
+        manager.addProduct(products[1]);
+        manager.addProduct(products[2]);
+        manager.addProduct(products[3]);
+
 
         String manufacturer = "Apple";
         Product[] actual = manager.searchBy(manufacturer);
 
         assertArrayEquals(expected, actual);
     }
-
-
 
 }

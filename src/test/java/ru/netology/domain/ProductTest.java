@@ -42,7 +42,7 @@ class ProductTest {
     }
 
     @Test
-    public void shouldCompareEqualsObjects() {
+    public void shouldCompareObjects() {
         Product first = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 200);
         Product second = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 200);
 
@@ -50,12 +50,37 @@ class ProductTest {
     }
 
     @Test
-    public void shouldCompareNonEqualsObjects() {
+    public void shouldCompareObjectWithDifferentId() {
         Product first = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 200);
-        Product second = new Product(2, "The Lord of the Rings: The Two Towers", 500);
+        Product second = new Product(2, "The Lord of the Rings: The Fellowship of the Ring", 200);
 
         assertNotEquals(first, second);
     }
+
+    @Test
+    public void shouldCompareObjectWithDifferentPrices() {
+        Product first = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 200);
+        Product second = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 300);
+
+        assertNotEquals(first, second);
+    }
+
+    @Test
+    public void shouldCompareObjectWithDifferentNames() {
+        Product first = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 200);
+        Product second = new Product(1, "The Lord of the Rings: The Two Towers", 200);
+
+        assertNotEquals(first, second);
+    }
+
+    @Test
+    public void shouldCompareObjectWithAllDifferentFields() {
+        Product first = new Product(1, "The Lord of the Rings: The Fellowship of the Ring", 200);
+        Product second = new Product(2, "The Lord of the Rings: The Two Towers", 300);
+
+        assertNotEquals(first, second);
+    }
+
 
     @Test
     public void shouldCompareDifferentObjects() {
